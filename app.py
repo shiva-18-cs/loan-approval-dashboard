@@ -124,10 +124,11 @@ hr { border-color: #D5E8F5 !important; }
 /* Streamlit tables */
 div[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
 
-/* Hide hamburger / footer */
+/* Hide hamburger / footer / deploy button */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
-header { visibility: hidden; }
+div[data-testid="stAppDeployButton"] { display: none; }
+header { background: transparent !important; }
 </style>
 """, unsafe_allow_html=True)
 
