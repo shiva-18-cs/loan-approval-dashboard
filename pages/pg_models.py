@@ -62,27 +62,24 @@ def render():
         bg = 'linear-gradient(135deg,#D5F5E3,#A9DFBF)' if is_best else 'white'
         border = '#27AE60' if is_best else '#D5E8F5'
         st.markdown(f"""
-        <div style='background:{bg};border:2px solid {border};border-radius:14px;
-                    padding:16px 20px;margin-bottom:10px;display:flex;
-                    align-items:center;gap:20px;box-shadow:0 2px 10px rgba(0,0,0,0.06);'>
-            <div style='font-size:1.8rem;min-width:40px;text-align:center;'>{medal}</div>
-            <div style='font-weight:700;color:#1B4F72;min-width:180px;font-size:1rem;'>
-                {row['Model']}
-                {'<span style="background:#27AE60;color:white;padding:2px 10px;'
-                 'border-radius:12px;font-size:0.72rem;margin-left:8px;">BEST</span>' if is_best else ''}
-            </div>
-            <div style='display:flex;gap:24px;flex-wrap:wrap;'>
-                <div><span style='color:#6B7280;font-size:0.78rem;'>Accuracy</span><br>
-                     <b style='color:#1B4F72;'>{row['Accuracy (%)']:.2f}%</b></div>
-                <div><span style='color:#6B7280;font-size:0.78rem;'>Precision</span><br>
-                     <b style='color:#8E44AD;'>{row['Precision (%)']:.2f}%</b></div>
-                <div><span style='color:#6B7280;font-size:0.78rem;'>Recall</span><br>
-                     <b style='color:#D35400;'>{row['Recall (%)']:.2f}%</b></div>
-                <div><span style='color:#6B7280;font-size:0.78rem;'>F1 Score</span><br>
-                     <b style='color:#27AE60;'>{row['F1 Score (%)']:.2f}%</b></div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+<div style='background:{bg};border:2px solid {border};border-radius:14px;padding:16px 20px;margin-bottom:10px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 10px rgba(0,0,0,0.06);'>
+<div style='font-size:1.8rem;min-width:40px;text-align:center;'>{medal}</div>
+<div style='font-weight:700;color:#1B4F72;min-width:180px;font-size:1rem;'>
+{row['Model']}
+{'<span style="background:#27AE60;color:white;padding:2px 10px;border-radius:12px;font-size:0.72rem;margin-left:8px;">BEST</span>' if is_best else ''}
+</div>
+<div style='display:flex;gap:24px;flex-wrap:wrap;'>
+<div><span style='color:#6B7280;font-size:0.78rem;'>Accuracy</span><br>
+<b style='color:#1B4F72;'>{row['Accuracy (%)']:.2f}%</b></div>
+<div><span style='color:#6B7280;font-size:0.78rem;'>Precision</span><br>
+<b style='color:#8E44AD;'>{row['Precision (%)']:.2f}%</b></div>
+<div><span style='color:#6B7280;font-size:0.78rem;'>Recall</span><br>
+<b style='color:#D35400;'>{row['Recall (%)']:.2f}%</b></div>
+<div><span style='color:#6B7280;font-size:0.78rem;'>F1 Score</span><br>
+<b style='color:#27AE60;'>{row['F1 Score (%)']:.2f}%</b></div>
+</div>
+</div>
+""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 

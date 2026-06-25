@@ -134,8 +134,8 @@ def train_all_models():
     models = {
         'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
         'SVM':                 SVC(probability=True, random_state=42),
-        'KNN':                 KNeighborsClassifier(n_neighbors=5),
-        'Random Forest':       RandomForestClassifier(n_estimators=150, random_state=42, n_jobs=-1),
+        'KNN':                 KNeighborsClassifier(n_neighbors=3),
+        'Random Forest':       RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
     }
 
     results = {}

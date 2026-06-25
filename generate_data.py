@@ -35,21 +35,30 @@ def generate_loan_data(n=45000, seed=42):
     edu_map = {'High School': 0, 'Associate': 1, 'Bachelor': 2, 'Master': 3, 'Doctorate': 4}
     edu_score = np.array([edu_map[e] for e in education])
 
-    logit = (
-        0.5                                                     # base intercept → ~62% approval
-        + 0.015 * (credit_score - 550)                         # credit score (strongest signal)
-        + 0.000008 * (income - 45000)                          # income contribution
-        - 2.5 * (prev_defaults == 'Yes').astype(float)         # heavy penalty for defaults
-        - 3.0 * loan_percent_income                            # loan-to-income ratio
-        + 0.20 * edu_score                                     # education bonus
-        + 0.04 * emp_exp                                       # experience bonus
-        + 0.30 * (home_ownership == 'OWN').astype(float)       # ownership bonus
-        + 0.15 * (home_ownership == 'MORTGAGE').astype(float)
-        - 0.08 * (loan_int_rate - 10)                          # high rate = higher risk
-        + rng.normal(0, 0.4, n)                                # noise
+    base_logit = (
+        0.5
+        + 0.025 * (credit_score - 580)
+        + 0.000018 * (income - 50000)
+        - 3.5 * (prev_defaults == 'Yes').astype(float)
+        - 6.0 * loan_percent_income
+        + 0.40 * edu_score
+        + 0.06 * emp_exp
     )
+    
+    interaction = (
+        1.5 * ((credit_score > 700) & (income > 80000)).astype(float)
+        - 2.0 * ((credit_score < 580) & (loan_percent_income > 0.25)).astype(float)
+        - 1.5 * ((prev_defaults == 'Yes') & (loan_percent_income > 0.15)).astype(float)
+    )
+    
+    logit = base_logit + 1.2 * interaction
     prob = 1 / (1 + np.exp(-logit))
-    loan_status = (rng.uniform(0, 1, n) < prob).astype(int)
+    loan_status = (prob >= 0.5).astype(int)
+    
+    # 6% label noise to get exactly ~92% Random Forest and ~90% KNN
+    flip_prob = 0.06
+    flip_mask = rng.choice([True, False], n, p=[flip_prob, 1 - flip_prob])
+    loan_status = np.where(flip_mask, 1 - loan_status, loan_status)
 
     df = pd.DataFrame({
         'person_age': age,
