@@ -1,0 +1,6 @@
+__pycache__/
+.streamlit/
+data/loan_data.csv
+*.pyc
+.DS_Store
+*.log
