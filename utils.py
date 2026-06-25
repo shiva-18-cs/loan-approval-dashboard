@@ -18,7 +18,7 @@ from sklearn.metrics import (
 )
 
 # ─────────────────────────── constants ───────────────────────────
-DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "loan_data.csv")
+DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "loan_data_v2.csv")
 
 SKEWED_COLS = [
     'person_age', 'person_income', 'person_emp_exp',
